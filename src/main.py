@@ -21,10 +21,11 @@ def launch_gui(league_api):
             text_color='red',
         )],
         [sg.Checkbox(
-            'Create lobby (if not in a party)',
+            'Create lobby',
             key='AUTO_LOBBY',
             default=cfg.AUTO_LOBBY,
             enable_events=True,
+            tooltip='Creates the game lobby for you (if you aren\'t already in one).'
         )],
         [sg.Text('Game Mode ', size=(15,1)), sg.Combo(
             [x.name for x in QueueType],
@@ -57,19 +58,21 @@ def launch_gui(league_api):
             'Auto start queue',
             key='AUTO_QUEUE',
             default=cfg.AUTO_QUEUE,
-            enable_events=True
+            enable_events=True,
+            tooltip='Starts the queue for the selected game mode automatically.'
         )],
         [sg.Checkbox(
             'Auto accept queue pop',
             key='AUTO_ACCEPT',
             default=cfg.AUTO_ACCEPT,
-            enable_events=True
+            enable_events=True,
         )],
         [sg.Checkbox(
             'Auto skip post-game',
             key='AUTO_SKIP_POSTGAME',
             default=cfg.AUTO_SKIP_POSTGAME,
-            enable_events=True
+            enable_events=True,
+            tooltip='Automatically honors a random player and hits "Play Again"'
         )],
         [sg.Button('Start', key='toggle')],
     ]
