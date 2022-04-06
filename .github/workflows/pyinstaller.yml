@@ -22,7 +22,7 @@ jobs:
 
     - uses: actions/upload-artifact@v2
       with:
-        name: "ARAM AutoQueue"
+        name: "AutoQr"
         path: src/dist/windows
 
     - name: Release

@@ -1,6 +1,6 @@
 """ main.py
 
-Entrypoint for ARAM-auto-queue
+Entrypoint for AutoQr
 
 """
 
