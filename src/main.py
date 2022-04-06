@@ -165,6 +165,7 @@ def should_display_role_selection(config: Config):
 
 def toggle_process(proc, league_api):
     if proc is not None:
+        league_api.stop_queue()
         proc.terminate()
         return None
 

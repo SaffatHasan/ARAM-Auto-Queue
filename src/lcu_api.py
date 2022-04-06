@@ -80,6 +80,9 @@ class LeagueAPI:
     def queue(self):
         self.request('post', '/lol-lobby/v2/lobby/matchmaking/search')
 
+    def stop_queue(self):
+        self.request('delete', '/lol-lobby/v2/lobby/matchmaking/search')
+
     def select_position_preferences(self, primary: Roles, secondary: Roles):
         return self.request(
             'put',
