@@ -21,9 +21,9 @@ class LeagueAPI:
         self.__session = Session()
         self.__session.auth = ('riot', process_args['remoting-auth-token'])
         self.__session.verify = False  # LCU api uses a self-signed cert
+        disable_warnings(exceptions.InsecureRequestWarning)
 
     def loop(self):
-        disable_warnings(exceptions.InsecureRequestWarning)
         while True:
             self.run()
             sleep_duration = 1
