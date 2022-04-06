@@ -75,7 +75,7 @@ def launch_gui(league_api):
     ]
 
     window = sg.Window(
-        title="ARAM auto-queue",
+        title="AutoQr",
         layout=layout,
     )
 
