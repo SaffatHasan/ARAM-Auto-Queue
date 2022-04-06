@@ -18,8 +18,10 @@ def parse_cmdline_args(cmdline_args):
 
 
 def find_lcu_process():
-    while True:
+    max_tries = 5
+    for _ in range(max_tries):
         for process in process_iter():
             if process.name() in ['LeagueClientUx.exe', 'LeagueClientUx']:
                 return process
-        time.sleep(0.5)
+        time.sleep(0.1)
+    raise FileNotFoundError

@@ -179,4 +179,12 @@ if __name__ == '__main__':
         # On Windows calling this function is necessary.
         multiprocessing.freeze_support()
     cfg = Config()
-    launch_gui(LeagueAPI(cfg))
+    try:
+        launch_gui(LeagueAPI(cfg))
+    except FileNotFoundError:
+        sg.popup(
+            'Failed to start',
+            'Have you logged into League of Legends?',
+            auto_close=True,
+            auto_close_duration=5,
+        )
