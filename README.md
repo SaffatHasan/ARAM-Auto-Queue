@@ -1,4 +1,4 @@
-# ARAM Auto Queue ![lint](https://github.com/SaffatHasan/Aram-Auto-Queue/actions/workflows/pylint.yml/badge.svg) [![Package Application with Pyinstaller](https://github.com/SaffatHasan/ARAM-Auto-Queue/actions/workflows/pyinstaller.yml/badge.svg)](https://github.com/SaffatHasan/ARAM-Auto-Queue/actions/workflows/pyinstaller.yml)
+# AutoQr ![lint](https://github.com/SaffatHasan/AutoQr/actions/workflows/pylint.yml/badge.svg) [![Package Application with Pyinstaller](https://github.com/SaffatHasan/AutoQr/actions/workflows/pyinstaller.yml/badge.svg)](https://github.com/SaffatHasan/AutoQr/actions/workflows/pyinstaller.yml)
 
 ![](assets/sample.png)
 
@@ -38,7 +38,7 @@ See [Build.md](docs/build.md)
 
 ## Releases
 
-https://github.com/SaffatHasan/ARAM-Auto-Queue/releases
+https://github.com/SaffatHasan/AutoQr/releases
 
 Note: I don't know how to sign executables. You may get a warning. Please be careful when running arbitrary executable files from the internet.
 
