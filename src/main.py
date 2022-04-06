@@ -27,32 +27,32 @@ def launch_gui(league_api):
             enable_events=True,
             tooltip='Creates the game lobby for you (if you aren\'t already in one).'
         )],
-        [sg.Text('Game Mode ', size=(15,1)), sg.Combo(
+        [sg.Text('Game Mode ', size=(15, 1)), sg.Combo(
             [x.name for x in QueueType],
             key='QUEUE_ID',
             default_value=cfg.QUEUE_ID.name,
             disabled=not cfg.AUTO_LOBBY,
             readonly=True,
             enable_events=True,
-            size=(8,1),
+            size=(8, 1),
         )],
-        [sg.Text("Primary Role", size=(15,1)), sg.Combo(
+        [sg.Text("Primary Role", size=(15, 1)), sg.Combo(
             [x.name for x in Roles],
             key='PRIMARY_ROLE',
             default_value=cfg.PRIMARY_ROLE.name,
             disabled=not queue_has_roles(cfg.QUEUE_ID),
             readonly=True,
             enable_events=True,
-            size=(8,1),
+            size=(8, 1),
         )],
-        [sg.Text("Secondary Role", size=(15,1)), sg.Combo(
+        [sg.Text("Secondary Role", size=(15, 1)), sg.Combo(
             [x.name for x in Roles],
             key='SECONDARY_ROLE',
             default_value=cfg.SECONDARY_ROLE.name,
             disabled=not queue_has_roles(cfg.QUEUE_ID),
             readonly=True,
             enable_events=True,
-            size=(8,1),
+            size=(8, 1),
         )],
         [sg.Checkbox(
             'Auto start queue',
@@ -153,6 +153,7 @@ def launch_gui(league_api):
             break
 
         league_api.update_config(cfg)
+
 
 def should_display_role_selection(config: Config):
     if not config.AUTO_LOBBY:
