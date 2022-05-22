@@ -1,14 +1,10 @@
 certifi==2021.10.8
 charset-normalizer==2.0.10
-idna==3.3
-psutil==5.9.0
-requests==2.27.1
-urllib3==1.26.8
-certifi==2021.10.8
-charset-normalizer==2.0.10
+dataclass-wizard==0.22.1
 idna==3.3
 psutil==5.9.0
 PySimpleGUI==4.56.0
 PyYAML==6.0
 requests==2.27.1
+typing_extensions==4.2.0
 urllib3==1.26.8

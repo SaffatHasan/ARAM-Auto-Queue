@@ -178,7 +178,7 @@ if __name__ == '__main__':
     if sys.platform.startswith('win'):
         # On Windows calling this function is necessary.
         multiprocessing.freeze_support()
-    cfg = Config()
+    cfg = Config.load()
     try:
         launch_gui(LeagueAPI(cfg))
     except FileNotFoundError:
