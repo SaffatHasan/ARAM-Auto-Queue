@@ -62,10 +62,11 @@ class LeagueAPI:
             if self.config.AUTO_PLAY_AGAIN:
                 self.play_again()
 
-    def update_config(self, config):
+    def update_config(self, config: Config):
         self.config = config
+        config.save()
 
-    def request(self, method, endpoint, data=None):
+    def request(self, method: str, endpoint: str, data=None):
         return self.__session.request(method, urljoin(
             self.base_url, endpoint), data=dumps(data))
 
