@@ -19,5 +19,6 @@ build:
     cd src && pyinstaller \
         --onefile \
         --noconsole \
+        --icon=favicon.ico \
         --distpath ../dist \
-        build.spec
+        main.py
