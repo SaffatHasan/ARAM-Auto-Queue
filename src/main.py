@@ -142,10 +142,10 @@ def launch_gui(league_api):
             cfg.AUTO_ACCEPT = not cfg.AUTO_ACCEPT
 
         elif event == 'AUTO_SKIP_POSTGAME':
-            cfg.AUTO_SKIP_POSTGAME = not cfg.AUTO_QUEUE
+            cfg.AUTO_SKIP_POSTGAME = not cfg.AUTO_SKIP_POSTGAME
 
         elif event == 'AUTO_PLAY_AGAIN':
-            cfg.AUTO_PLAY_AGAIN = not cfg.AUTO_QUEUE
+            cfg.AUTO_PLAY_AGAIN = not cfg.AUTO_PLAY_AGAIN
 
         elif event == sg.WINDOW_CLOSED:
             if background_proc:
