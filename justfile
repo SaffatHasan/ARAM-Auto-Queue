@@ -1,5 +1,5 @@
 run:
-    python3 src/main.py
+    cd src && python3 main.py
 
 lint:
     pip install autopep8 pylint
@@ -13,12 +13,14 @@ clean:
     pip freeze | xargs pip uninstall -y
     rm -rf dist/ build/ main.spec src/__pycache__/
 
-build:
+package: install-deps
     pip install pyinstaller
-    pip install -r src/requirements.txt
     cd src && pyinstaller \
         --onefile \
         --noconsole \
+        --name "AutoQr" \
+        --add-data "favicon.ico;." \
         --icon=favicon.ico \
         --distpath ../dist \
+        --workpath ../build \
         main.py
