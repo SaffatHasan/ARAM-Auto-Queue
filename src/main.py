@@ -6,6 +6,7 @@ Entrypoint for AutoQr
 
 import multiprocessing
 import sys
+import os
 import PySimpleGUI as sg
 from config import Config
 from constants import QueueType, Roles, queue_has_roles
@@ -76,10 +77,10 @@ def launch_gui(league_api):
         )],
         [sg.Button('Start', key='toggle')],
     ]
-
     window = sg.Window(
         title="AutoQr",
         layout=layout,
+        icon=resource_path('favicon.ico'),
     )
 
     # Run lcu_api in the background, store its process in MAIN_PROC
@@ -174,6 +175,19 @@ def toggle_process(proc, league_api):
     return proc
 
 
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller
+    https://stackoverflow.com/a/13790741
+    """
+    # pylint: disable=W0703, W0212
+    if hasattr(sys, '_MEIPASS'):
+        base_path = sys._MEIPASS
+    else:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
+
 if __name__ == '__main__':
     if sys.platform.startswith('win'):
         # On Windows calling this function is necessary.
@@ -185,6 +199,7 @@ if __name__ == '__main__':
         sg.popup(
             'Failed to start',
             'Have you logged into League of Legends?',
+            icon=resource_path('favicon.ico'),
             auto_close=True,
             auto_close_duration=5,
         )

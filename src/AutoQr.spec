@@ -8,7 +8,7 @@ a = Analysis(
     ['main.py'],
     pathex=[],
     binaries=[],
-    datas=[],
+    datas=[('favicon.ico', '.')],
     hiddenimports=[],
     hookspath=[],
     runtime_hooks=[],
