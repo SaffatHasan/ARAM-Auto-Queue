@@ -21,6 +21,7 @@ package: install-deps
         --name "AutoQr" \
         --add-data "favicon.ico;." \
         --icon=favicon.ico \
+        --hidden-import "yaml" \
         --distpath ../dist \
         --workpath ../build \
         main.py
