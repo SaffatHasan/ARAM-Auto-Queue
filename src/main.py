@@ -17,9 +17,9 @@ def launch_gui(league_api):
     sg.theme('DefaultNoMoreNagging')
     layout = [
         [sg.Text(
-            'Not running',
+            'Running',
             key='status',
-            text_color='red',
+            text_color='green',
         )],
         [sg.Checkbox(
             'Create lobby',
@@ -75,7 +75,7 @@ def launch_gui(league_api):
             enable_events=True,
             tooltip='Automatically honors a random player and hits "Play Again"'
         )],
-        [sg.Button('Start', key='toggle')],
+        [sg.Button('Stop', key='toggle')],
     ]
     window = sg.Window(
         title="AutoQr",
@@ -84,7 +84,7 @@ def launch_gui(league_api):
     )
 
     # Run lcu_api in the background, store its process in MAIN_PROC
-    background_proc = None
+    background_proc = toggle_process(None, league_api)
 
     # GUI event loop handler
     while True:
