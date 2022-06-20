@@ -16,6 +16,7 @@ from constants import QueueType, Roles, queue_has_roles
 class LeagueAPI:
     def __init__(self, config: Config):
         self.config = config
+        self.sleep_duration = 1
         process_args = lcu_process_args()
         self.base_url = f'https://127.0.0.1:{process_args["app-port"]}/'
         self.__session = Session()
@@ -26,8 +27,7 @@ class LeagueAPI:
     def loop(self):
         while True:
             self.run()
-            sleep_duration = 1
-            time.sleep(sleep_duration)
+            time.sleep(self.sleep_duration)
 
     def run(self):
         # pylint: disable=R0912
@@ -51,7 +51,8 @@ class LeagueAPI:
             if self.config.AUTO_ACCEPT:
                 self.accept()
         elif phase in ['ChampSelect', 'InProgress']:
-            pass
+            # ChampSelect and InProgress are long-lived.
+            time.sleep(self.sleep_duration)
         elif phase == 'PreEndOfGame':
             if self.config.AUTO_SKIP_POSTGAME:
                 self.level_change_ack()
