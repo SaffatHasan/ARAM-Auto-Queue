@@ -41,7 +41,7 @@ def launch_gui(league_api: LeagueAPI, cfg: Config):
             enable_events=True,
             size=(8, 1),
         )],
-        [sg.Text("Primary", size=(9, 1)), sg.Combo(
+        [sg.Text('Primary', size=(9, 1)), sg.Combo(
             [x.name for x in Roles],
             key='PRIMARY_ROLE',
             default_value=cfg.PRIMARY_ROLE.name,
@@ -50,7 +50,7 @@ def launch_gui(league_api: LeagueAPI, cfg: Config):
             enable_events=True,
             size=(8, 1),
         )],
-        [sg.Text("Secondary", size=(9, 1)), sg.Combo(
+        [sg.Text('Secondary', size=(9, 1)), sg.Combo(
             [x.name for x in Roles],
             key='SECONDARY_ROLE',
             default_value=cfg.SECONDARY_ROLE.name,
@@ -62,7 +62,7 @@ def launch_gui(league_api: LeagueAPI, cfg: Config):
         [sg.Button('Stop', key='toggle')],
     ]
     window = sg.Window(
-        title="AutoQr",
+        title='AutoQr',
         layout=layout,
         icon=resource_path('favicon.ico'),
         finalize=True,
