@@ -13,4 +13,8 @@ $('#girkov-arpa').on('click', () => {
   launch('https://girkovarpa.itch.io/?ref=qr');
 });
 
+$('#license').on('click', () => {
+  launch('https://github.com/GirkovArpa/qr?ref=qr');
+});
+
 $('button').on('click', () => Window.this.close());
