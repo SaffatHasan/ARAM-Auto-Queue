@@ -8,7 +8,6 @@ export class LeagueAPI {
 
   constructor(config) {
     this.config = config;
-    this.init();
   }
 
   async init() {

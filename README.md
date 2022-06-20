@@ -2,14 +2,10 @@
   <a href="https://github.com/girkovarpa/qr">
     <img src="sciter/png/logo/256.png" alt="Qr"/>
   </a>
-  <br/><br/>
-  Qr
-  <br/>
-  <br/>
 </h1>
 
 <h4 align="center">LoL Auto-Accept & Insta-Lock</h4>
-<h5 align="center"><i>Port of <a href="https://github.com/SaffatHasan/AutoQr">AutoQr</a></i></h5>
+<h5 align="center"><i>port of <a href="https://github.com/SaffatHasan/AutoQr">AutoQr</a> from python to rust + javascript</i></h5>
 
 <h1 align="center">
   <img src="screenshot.png" alt="screenshot" /></a><br/><br/>
