@@ -94,6 +94,9 @@ def launch_gui(league_api):
 
 
 def update_state(league_api, window, background_proc, event, values=None):
+    """ Given the current event, transition to new state. E.g. if the user
+    hits the start/stop button then we toggle behavior.
+    """
     cfg = league_api.config
     if event == 'toggle':
         background_proc = toggle_process(background_proc, league_api)
@@ -153,7 +156,9 @@ def update_state(league_api, window, background_proc, event, values=None):
 
     elif event == sg.WINDOW_CLOSED:
         if background_proc:
+            league_api.stop_queue()
             background_proc.terminate()
+        sys.exit(0)
 
     league_api.update_config(cfg)
 
