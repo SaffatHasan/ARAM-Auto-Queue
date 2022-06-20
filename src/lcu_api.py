@@ -38,9 +38,7 @@ class LeagueAPI:
             self.create_lobby()
             self.select_roles()
         elif phase == 'Lobby':
-            if not self.config.AUTO_LOBBY:
-                return
-            if self.is_lobby_leader() and self.lobby_queue_id() != self.config.QUEUE_ID:
+            if self.is_lobby_leader() and self.lobby_queue_id() != self.config.QUEUE_ID.value:
                 self.create_lobby()
             if self.is_waiting_on_dodge_timer():
                 return
