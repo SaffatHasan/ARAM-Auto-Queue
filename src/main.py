@@ -8,9 +8,12 @@ import multiprocessing
 import sys
 import os
 import PySimpleGUI as sg
+import urllib3
 from config import Config
 from constants import QueueType, Roles, queue_has_roles
 from lcu_api import LeagueAPI
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
 def launch_gui(league_api):
@@ -21,14 +24,15 @@ def launch_gui(league_api):
             key='status',
             text_color='green',
         )],
-        [sg.Checkbox(
-            'Create lobby',
+        [sg.Text('Create lobby?', size=(16, 1)), sg.Checkbox(
+            '',
             key='AUTO_LOBBY',
             default=cfg.AUTO_LOBBY,
             enable_events=True,
-            tooltip='Creates the game lobby for you (if you aren\'t already in one).'
+            expand_x=True,
+            tooltip='Creates the game lobby for you (if you aren\'t already in one).',
         )],
-        [sg.Text('Game Mode ', size=(15, 1)), sg.Combo(
+        [sg.Text('Mode', size=(9, 1)), sg.Combo(
             [x.name for x in QueueType],
             key='QUEUE_ID',
             default_value=cfg.QUEUE_ID.name,
@@ -37,7 +41,7 @@ def launch_gui(league_api):
             enable_events=True,
             size=(8, 1),
         )],
-        [sg.Text("Primary Role", size=(15, 1)), sg.Combo(
+        [sg.Text("Primary", size=(9, 1)), sg.Combo(
             [x.name for x in Roles],
             key='PRIMARY_ROLE',
             default_value=cfg.PRIMARY_ROLE.name,
@@ -46,7 +50,7 @@ def launch_gui(league_api):
             enable_events=True,
             size=(8, 1),
         )],
-        [sg.Text("Secondary Role", size=(15, 1)), sg.Combo(
+        [sg.Text("Secondary", size=(9, 1)), sg.Combo(
             [x.name for x in Roles],
             key='SECONDARY_ROLE',
             default_value=cfg.SECONDARY_ROLE.name,
@@ -54,26 +58,6 @@ def launch_gui(league_api):
             readonly=True,
             enable_events=True,
             size=(8, 1),
-        )],
-        [sg.Checkbox(
-            'Auto start queue',
-            key='AUTO_QUEUE',
-            default=cfg.AUTO_QUEUE,
-            enable_events=True,
-            tooltip='Starts the queue for the selected game mode automatically.'
-        )],
-        [sg.Checkbox(
-            'Auto accept queue pop',
-            key='AUTO_ACCEPT',
-            default=cfg.AUTO_ACCEPT,
-            enable_events=True,
-        )],
-        [sg.Checkbox(
-            'Auto skip post-game',
-            key='AUTO_SKIP_POSTGAME',
-            default=cfg.AUTO_SKIP_POSTGAME,
-            enable_events=True,
-            tooltip='Automatically honors a random player and hits "Play Again"'
         )],
         [sg.Button('Stop', key='toggle')],
     ]
@@ -112,9 +96,6 @@ def update_state(league_api, window, background_proc, event, values=None):
             disabled=not should_display_role_selection(cfg) or bool(background_proc))
         window['SECONDARY_ROLE'].update(
             disabled=not should_display_role_selection(cfg) or bool(background_proc))
-        window['AUTO_QUEUE'].update(disabled=bool(background_proc))
-        window['AUTO_ACCEPT'].update(disabled=bool(background_proc))
-        window['AUTO_SKIP_POSTGAME'].update(disabled=bool(background_proc))
 
     elif event == 'QUEUE_ID':
         cfg.QUEUE_ID = QueueType[values['QUEUE_ID']]
@@ -141,18 +122,6 @@ def update_state(league_api, window, background_proc, event, values=None):
 
     elif event == 'SECONDARY_ROLE':
         cfg.SECONDARY_ROLE = Roles[values['SECONDARY_ROLE']]
-
-    elif event == 'AUTO_QUEUE':
-        cfg.AUTO_QUEUE = not cfg.AUTO_QUEUE
-
-    elif event == 'AUTO_ACCEPT':
-        cfg.AUTO_ACCEPT = not cfg.AUTO_ACCEPT
-
-    elif event == 'AUTO_SKIP_POSTGAME':
-        cfg.AUTO_SKIP_POSTGAME = not cfg.AUTO_SKIP_POSTGAME
-
-    elif event == 'AUTO_PLAY_AGAIN':
-        cfg.AUTO_PLAY_AGAIN = not cfg.AUTO_PLAY_AGAIN
 
     elif event == sg.WINDOW_CLOSED:
         if background_proc:

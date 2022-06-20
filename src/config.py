@@ -9,11 +9,7 @@ from constants import QueueType, Roles
 
 @dataclass
 class Config(YAMLWizard, key_transform='SNAKE'):
-    AUTO_ACCEPT: bool
     AUTO_LOBBY: bool
-    AUTO_PLAY_AGAIN: bool
-    AUTO_SKIP_POSTGAME: bool
-    AUTO_QUEUE: bool
     QUEUE_ID: QueueType
     PRIMARY_ROLE: Roles
     SECONDARY_ROLE: Roles
@@ -29,11 +25,7 @@ class Config(YAMLWizard, key_transform='SNAKE'):
     def default():
         """ Returns an instance of Config with default values """
         return Config(
-            AUTO_ACCEPT=True,
             AUTO_LOBBY=True,
-            AUTO_PLAY_AGAIN=True,
-            AUTO_QUEUE=True,
-            AUTO_SKIP_POSTGAME=True,
             QUEUE_ID=QueueType.RANKED,
             PRIMARY_ROLE=Roles.MID,
             SECONDARY_ROLE=Roles.JG,
