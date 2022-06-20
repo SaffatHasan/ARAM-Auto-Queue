@@ -31,5 +31,5 @@ class Roles(Enum):
     JG = "JUNGLE"
     MID = "MIDDLE"
     BOT = "BOTTOM"
-    SUPP = "SUPPORT"
+    SUPP = "UTILITY"
     FILL = "FILL"
