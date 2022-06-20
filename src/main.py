@@ -24,7 +24,7 @@ def launch_gui(league_api: LeagueAPI, cfg: Config):
             key='status',
             text_color='green',
         )],
-        [sg.Text('Create lobby?', size=(16, 1)), sg.Checkbox(
+        [sg.Text('Create lobby?', size=(19, 1)), sg.Checkbox(
             '',
             key='AUTO_LOBBY',
             default=cfg.AUTO_LOBBY,
@@ -32,32 +32,32 @@ def launch_gui(league_api: LeagueAPI, cfg: Config):
             expand_x=True,
             tooltip='Creates the game lobby for you (if you aren\'t already in one).',
         )],
-        [sg.Text('Mode', size=(9, 1)), sg.Combo(
+        [sg.Text('Mode', size=(10, 1)), sg.Combo(
             [x.name for x in QueueType],
             key='QUEUE_ID',
             default_value=cfg.QUEUE_ID.name,
             disabled=not cfg.AUTO_LOBBY,
             readonly=True,
             enable_events=True,
-            size=(8, 1),
+            size=(10, 1),
         )],
-        [sg.Text('Primary', size=(9, 1)), sg.Combo(
+        [sg.Text('Primary', size=(10, 1)), sg.Combo(
             [x.name for x in Roles],
             key='PRIMARY_ROLE',
             default_value=cfg.PRIMARY_ROLE.name,
             disabled=not queue_has_roles(cfg.QUEUE_ID),
             readonly=True,
             enable_events=True,
-            size=(8, 1),
+            size=(10, 1),
         )],
-        [sg.Text('Secondary', size=(9, 1)), sg.Combo(
+        [sg.Text('Secondary', size=(10, 1)), sg.Combo(
             [x.name for x in Roles],
             key='SECONDARY_ROLE',
             default_value=cfg.SECONDARY_ROLE.name,
             disabled=not queue_has_roles(cfg.QUEUE_ID),
             readonly=True,
             enable_events=True,
-            size=(8, 1),
+            size=(10, 1),
         )],
         [sg.Button('Stop', key='toggle')],
     ]
