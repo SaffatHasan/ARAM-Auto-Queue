@@ -35,33 +35,42 @@ class LeagueAPI:
         if phase is None:
             if not self.config.AUTO_LOBBY:
                 return
-            self.create_lobby(self.config.QUEUE_ID)
-            if not queue_has_roles(self.config.QUEUE_ID):
-                return
-            self.select_position_preferences(
-                self.config.PRIMARY_ROLE,
-                self.config.SECONDARY_ROLE,
-            )
+            self.create_lobby()
+            self.select_roles()
         elif phase == 'Lobby':
-            if self.config.AUTO_QUEUE:
-                self.queue()
+            if not self.config.AUTO_LOBBY:
+                return
+            if self.is_lobby_leader() and self.lobby_queue_id() != self.config.QUEUE_ID:
+                self.create_lobby()
+            if self.is_waiting_on_dodge_timer():
+                return
+            self.select_roles()
+            self.queue()
         elif phase == 'Matchmaking':
             pass
         elif phase == 'ReadyCheck':
-            if self.config.AUTO_ACCEPT:
-                self.accept()
+            self.accept()
         elif phase in ['ChampSelect', 'InProgress']:
             # ChampSelect and InProgress are long-lived.
             time.sleep(self.sleep_duration)
         elif phase == 'PreEndOfGame':
-            if self.config.AUTO_SKIP_POSTGAME:
-                self.level_change_ack()
-                self.reward_granted_ack()
-                self.mutual_honor_ack()
-                self.honor_player()
+            self.level_change_ack()
+            self.reward_granted_ack()
+            self.mutual_honor_ack()
+            self.honor_player()
         elif phase == 'EndOfGame':
-            if self.config.AUTO_PLAY_AGAIN:
-                self.play_again()
+            self.play_again()
+
+    def is_waiting_on_dodge_timer(self):
+        dodge_ids = self.request(
+            'get', '/lol-gameflow/v1/session').json()['gameDodge']['dodgeIds']
+
+        return len(dodge_ids) > 0
+
+    def select_roles(self):
+        if not queue_has_roles(self.config.QUEUE_ID):
+            return
+        self.select_position_preferences()
 
     def update_config(self, config: Config):
         self.config = config
@@ -75,9 +84,20 @@ class LeagueAPI:
         return self.request(
             'get', '/lol-gameflow/v1/session').json().get('phase')
 
-    def create_lobby(self, queue_type: QueueType):
+    def is_lobby_leader(self):
+        return self.request(
+            'get',
+            '/lol-gameflow/v1/gameflow-metadata/player-status',
+        ).json()['currentLobbyStatus']['isLeader']
+
+    def lobby_queue_id(self):
+        current_queue_id = self.request(
+            'get', '/lol-gameflow/v1/session').json()['gameData']['queue']['id']
+        return current_queue_id
+
+    def create_lobby(self):
         self.request('post', '/lol-lobby/v2/lobby',
-                     {"queueId": queue_type.value})
+                     {"queueId": self.config.QUEUE_ID.value})
 
     def queue(self):
         self.request('post', '/lol-lobby/v2/lobby/matchmaking/search')
@@ -85,13 +105,13 @@ class LeagueAPI:
     def stop_queue(self):
         self.request('delete', '/lol-lobby/v2/lobby/matchmaking/search')
 
-    def select_position_preferences(self, primary: Roles, secondary: Roles):
+    def select_position_preferences(self):
         return self.request(
             'put',
             '/lol-lobby/v2/lobby/members/localMember/position-preferences',
             {
-                'firstPreference': primary.value,
-                'secondPreference': secondary.value,
+                'firstPreference': self.config.PRIMARY_ROLE.value,
+                'secondPreference': self.config.SECONDARY_ROLE.value,
             },
         )
 
