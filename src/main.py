@@ -16,7 +16,7 @@ from lcu_api import LeagueAPI
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
-def launch_gui(league_api):
+def launch_gui(league_api: LeagueAPI, cfg: Config):
     sg.theme('DefaultNoMoreNagging')
     layout = [
         [sg.Text(
@@ -69,12 +69,18 @@ def launch_gui(league_api):
     )
 
     # Run lcu_api in the background, store its process in background_proc
-    background_proc = update_state(league_api, window, background_proc=None, event='toggle', values=None)
+    background_proc = update_state(
+        league_api,
+        window,
+        background_proc=None,
+        event='toggle',
+        values=None)
 
     # GUI event loop handler
     while True:
         event, values = window.read()
-        background_proc = update_state(league_api, window, background_proc, event, values)
+        background_proc = update_state(
+            league_api, window, background_proc, event, values)
 
 
 def update_state(league_api, window, background_proc, event, values=None):
@@ -133,10 +139,11 @@ def update_state(league_api, window, background_proc, event, values=None):
 
     return background_proc
 
-def should_display_role_selection(config: Config):
-    if not config.AUTO_LOBBY:
+
+def should_display_role_selection(cfg: Config):
+    if not cfg.AUTO_LOBBY:
         return False
-    if not queue_has_roles(config.QUEUE_ID):
+    if not queue_has_roles(cfg.QUEUE_ID):
         return False
     return True
 
@@ -169,9 +176,11 @@ if __name__ == '__main__':
     if sys.platform.startswith('win'):
         # On Windows calling this function is necessary.
         multiprocessing.freeze_support()
-    cfg = Config.load()
+    config = Config.load()
     try:
-        launch_gui(LeagueAPI(cfg))
+        # TODO(saffathasan): WOW this is a huge code smell. Should config
+        # really be embedded?
+        launch_gui(LeagueAPI(config), config)
     except FileNotFoundError:
         sg.popup(
             'Failed to start',

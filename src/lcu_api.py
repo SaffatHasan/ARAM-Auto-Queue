@@ -10,7 +10,7 @@ from requests import Session
 from urllib3 import disable_warnings, exceptions
 from proc_utils import lcu_process_args
 from config import Config
-from constants import QueueType, Roles, queue_has_roles
+from constants import queue_has_roles
 
 
 class LeagueAPI:
