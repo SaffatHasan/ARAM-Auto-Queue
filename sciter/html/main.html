@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html window-icon="this://app/png/logo/32.png">
+
+  <head>
+    <title>Qr</title>
+    <link href="this://app/css/main.css" rel="stylesheet">
+    <link href="this://app/css/menu.css" rel="stylesheet">
+    <script src="this://app/js/main.js" type="module"></script>
+  </head>
+
+  <body>
+    <ul #menu-bar>
+      <li>Help
+        <menu>
+      <li #about title="About" accesskey="!F1">About <span class="accesskey">F1</span></li>
+      </menu>
+      </li>
+    </ul>
+    <div #container>
+      <label #status>Not running</label>
+      <button #AUTO_LOBBY |checkbox title="Creates the game lobby for you (if you aren't already in one)."
+        checked>Create lobby (if not in a party)</button>
+      <label>Game Mode
+        <select #QUEUE_ID>
+          <option value="450">ARAM</option>
+          <option value="900">ARURF</option>
+          <option value="400">DRAFT</option>
+          <option value="420">RANKED</option>
+          <option value="430">BLIND</option>
+          <option value="440">FLEX</option>
+        </select>
+      </label>
+      <label>Primary Role
+        <select #PRIMARY_ROLE>
+          <option value="TOP">TOP</option>
+          <option value="JUNGLE">JG</option>
+          <option value="MIDDLE">MID</option>
+          <option value="BOTTOM">BOT</option>
+          <option value="SUPPORT">SUPP</option>
+          <option value="FILL">FILL</option>
+        </select>
+      </label>
+      <label>Secondary Role
+        <select #SECONDARY_ROLE>
+          <option value="TOP">TOP</option>
+          <option value="JUNGLE">JG</option>
+          <option value="MIDDLE">MID</option>
+          <option value="BOTTOM">BOT</option>
+          <option value="SUPPORT">SUPP</option>
+          <option value="FILL">FILL</option>
+        </select>
+      </label>
+      <button #AUTO_QUEUE |checkbox title="Starts the queue for the selected game mode automatically." checked>Auto
+        start queue</button>
+      <button #AUTO_ACCEPT |checkbox checked>Auto accept queue pop</button>
+      <button #AUTO_SKIP_POSTGAME |checkbox title="Automatically honors a random player and hits &quot;Play Again&quot;"
+        checked>Auto skip post-game</button>
+      <button #toggle>Start</button>
+    </div>
+  </body>
+
+</html>

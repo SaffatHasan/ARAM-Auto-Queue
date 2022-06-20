@@ -1,0 +1,46 @@
+html {
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+}
+
+#container {
+  background-color: rgba(233, 233, 233, 0.363);
+  flow: vertical;
+  height: *;
+  border-spacing: *;
+  padding: 1em;
+}
+
+#container > *:not(:first-child):not(#toggle) {
+  padding-top: 0.3em;
+}
+
+#container > label:first-child {
+  padding-bottom: 0.6em;
+}
+
+#container > label {
+  width: *;
+  border-spacing: *;
+  flow: horizontal;
+}
+
+#container > label > text {
+  vertical-align: middle;
+  height: *;
+}
+
+#container > label > select {
+  width: 6em;
+}
+
+#container option:hover:not(:current) {
+  background-color: threedface;
+}
+
+#container > button:last-child {
+  margin-top: 0.6em;
+}

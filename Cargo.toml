@@ -1,0 +1,23 @@
+[package]
+name = "qr"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+sciter-rs = "0.5.58"
+sysinfo = "0.24.5"
+remoteprocess = "0.4.9"
+reqwest = { version = "0.11", features = ["blocking", "json"] }
+http = "0.2.8"
+
+[target.'cfg(windows)'.build-dependencies]
+winres = "0.1"
+
+[package.metadata.winres]
+OriginalFilename = "qr.exe"
+LegalCopyright = "Copyright © Girkov Arpa 2022"
+FileDescription = "Qr: LoL auto-accept & insta-lock!"
+ProductName = "Qr"
+ProductVersion = "0.1.0"

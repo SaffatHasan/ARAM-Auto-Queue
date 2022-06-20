@@ -1,53 +1,20 @@
-# AutoQr ![lint](https://github.com/SaffatHasan/AutoQr/actions/workflows/pylint.yml/badge.svg) [![Package Application with Pyinstaller](https://github.com/SaffatHasan/AutoQr/actions/workflows/pyinstaller.yml/badge.svg)](https://github.com/SaffatHasan/AutoQr/actions/workflows/pyinstaller.yml)
+<h1 align="center">
+  <a href="https://github.com/girkovarpa/qr">
+    <img src="sciter/png/logo/256.png" alt="Qr"/>
+  </a>
+  <br/><br/>
+  Qr
+  <br/>
+  <br/>
+</h1>
 
-![](assets/sample.png)
+<h4 align="center">LoL Auto-Accept & Insta-Lock</h4>
+<h5 align="center"><i>Port of <a href="https://github.com/SaffatHasan/AutoQr">AutoQr</a></i></h5>
 
+<h1 align="center">
+  <img src="screenshot.png" alt="screenshot" /></a><br/><br/>
+</h1>
 
-!! Please ensure to disable closing client in background for best performance / compatibility !!
-![](assets/Screenshot_1.png)
+## Dependencies
 
-The purpose of this program is to streamline the flow between games. You'll no longer have to wait for buggy or unresponsive parts of the client to load as this script will programatically skip them.
-
-This program takes the following actions:
-
-1. Create a lobby
-1. Start queue
-1. Wait for champion selection and the game to end...
-1. Honor a random player in post-game
-1. Hit play again
-1. Repeat!
-
-## Requirements
-
-- Python3
-
-## Setup (running from source)
-
-1. Install [python](https://www.python.org/downloads/)
-1. Install dependencies
-    `pip install -r src/requirements.txt`
-
-## Build
-
-See [Build.md](docs/build.md)
-
-## Usage
-
-1. Login to league of legends
-1. `python3 src/main.py`
-
-## Releases
-
-https://github.com/SaffatHasan/AutoQr/releases
-
-Note: I don't know how to sign executables. You may get a warning. Please be careful when running arbitrary executable files from the internet.
-
-
-## Reference
-
-- LCU documentation https://lcu.vivide.re/
-- LCU utilities https://riot-api-libraries.readthedocs.io/en/latest/lcu.html
-
-## Credits
-
-This project is heavily inspired from [directx's auto-lock script](https://github.com/directx5/League-of-Legends-Auto-Accept-Insta-Lock-Python).
+- [sciter.dll](https://gitlab.com/sciter-engine/sciter-js-sdk/-/blob/f149f104dcd7fd0db6ca8157acce10f060f03afc/bin/windows/x32/sciter.dll) v4.4.8.38
