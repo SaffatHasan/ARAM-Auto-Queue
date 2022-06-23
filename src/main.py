@@ -24,13 +24,13 @@ def launch_gui(league_api: LeagueAPI, cfg: Config):
             key='status',
             text_color='green',
         )],
-        [sg.Text('Create lobby?', size=(19, 1)), sg.Checkbox(
+        [sg.Text('Set game mode?', size=(19, 1)), sg.Checkbox(
             '',
             key='AUTO_LOBBY',
             default=cfg.AUTO_LOBBY,
             enable_events=True,
             expand_x=True,
-            tooltip='Creates the game lobby for you (if you aren\'t already in one).',
+            tooltip='Sets the lobby type (if you\'re the leader)',
         )],
         [sg.Text('Mode', size=(10, 1)), sg.Combo(
             [x.name for x in QueueType],
