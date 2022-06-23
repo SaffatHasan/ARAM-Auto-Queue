@@ -1,14 +1,16 @@
 """ https://github.com/elliejs/Willump/blob/main/willump/proc_utils.py """
 
 import time
+import subprocess
 from psutil import process_iter
 
 
-def lcu_process_args():
-    return parse_cmdline_args(find_lcu_process().cmdline())
+def get_league_cmdline_args():
+    return parse_cmdline_args(get_or_start_league_process())
 
 
-def parse_cmdline_args(cmdline_args):
+def parse_cmdline_args(process):
+    cmdline_args = process.cmdline()
     cmdline_args_parsed = {}
     for cmdline_arg in cmdline_args:
         if len(cmdline_arg) > 0 and '=' in cmdline_arg:
@@ -17,11 +19,27 @@ def parse_cmdline_args(cmdline_args):
     return cmdline_args_parsed
 
 
-def find_lcu_process():
-    max_tries = 5
-    for _ in range(max_tries):
-        for process in process_iter():
-            if process.name() in ['LeagueClientUx.exe', 'LeagueClientUx']:
-                return process
-        time.sleep(0.1)
-    raise FileNotFoundError
+def get_or_start_league_process():
+    league_process = get_league_process()
+    if not league_process:
+        start_league()
+        # Wait 5s for league client to start.
+        time.sleep(5)
+        league_process = get_league_process()
+
+    if not league_process:
+        raise FileNotFoundError
+    return league_process
+
+
+def get_league_process():
+    for process in process_iter():
+        if process.name() in ['LeagueClientUx.exe', 'LeagueClientUx']:
+            return process
+    return None
+
+
+def start_league():
+    # Start league client.
+    league_path = 'C:\\Riot Games\\League of Legends\\LeagueClient.exe'
+    subprocess.call([league_path])
