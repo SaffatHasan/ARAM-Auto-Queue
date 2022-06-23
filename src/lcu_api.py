@@ -8,7 +8,7 @@ from urllib.parse import urljoin
 import time
 from requests import Session
 from urllib3 import disable_warnings, exceptions
-from proc_utils import lcu_process_args
+from proc_utils import get_league_cmdline_args
 from config import Config
 from constants import queue_has_roles
 
@@ -17,7 +17,7 @@ class LeagueAPI:
     def __init__(self, config: Config):
         self.config = config
         self.sleep_duration = 1
-        process_args = lcu_process_args()
+        process_args = get_league_cmdline_args()
         self.base_url = f'https://127.0.0.1:{process_args["app-port"]}/'
         self.__session = Session()
         self.__session.auth = ('riot', process_args['remoting-auth-token'])
