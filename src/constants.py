@@ -16,14 +16,16 @@ class QueueType(Enum):
     RANKED = 420
     BLIND = 430
     FLEX = 440
+    ULTMT_SPLLBK = 1400
 
 
 def queue_has_roles(queue: QueueType):
-    return queue in [
+    return queue in {
         QueueType.DRAFT,
         QueueType.FLEX,
-        QueueType.RANKED
-    ]
+        QueueType.RANKED,
+        QueueType.ULTMT_SPLLBK,
+    }
 
 
 class Roles(Enum):
