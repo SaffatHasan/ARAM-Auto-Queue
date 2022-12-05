@@ -24,7 +24,7 @@ class Config(YAMLWizard, key_transform='SNAKE'):
     def default():
         """ Returns an instance of Config with default values """
         return Config(
-            QUEUE_ID=QueueType.RANKED,
+            QUEUE_ID=QueueType.ARAM,
             PRIMARY_ROLE=Roles.MID,
             SECONDARY_ROLE=Roles.JG,
         )
