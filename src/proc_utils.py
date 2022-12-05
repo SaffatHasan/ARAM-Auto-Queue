@@ -14,7 +14,7 @@ def parse_cmdline_args(process):
     cmdline_args_parsed = {}
     for cmdline_arg in cmdline_args:
         if len(cmdline_arg) > 0 and '=' in cmdline_arg:
-            key, value = cmdline_arg[2:].split('=')
+            key, value = cmdline_arg[2:].split('=', 1)
             cmdline_args_parsed[key] = value
     return cmdline_args_parsed
 
