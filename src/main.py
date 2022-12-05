@@ -24,19 +24,10 @@ def launch_gui(league_api: LeagueAPI, cfg: Config):
             key='status',
             text_color='green',
         )],
-        [sg.Text('Set game mode?', size=(19, 1)), sg.Checkbox(
-            '',
-            key='AUTO_LOBBY',
-            default=cfg.AUTO_LOBBY,
-            enable_events=True,
-            expand_x=True,
-            tooltip='Sets the lobby type (if you\'re the leader)',
-        )],
         [sg.Text('Mode', size=(10, 1)), sg.Combo(
             [x.name for x in QueueType],
             key='QUEUE_ID',
             default_value=cfg.QUEUE_ID.name,
-            disabled=not cfg.AUTO_LOBBY,
             readonly=True,
             enable_events=True,
             size=(10, 1),
@@ -95,9 +86,8 @@ def update_state(league_api, window, background_proc, event, values=None):
         window['status'].update(
             text_color='green' if background_proc else 'red')
         window['toggle'].update('Stop' if background_proc else 'Start')
-        window['AUTO_LOBBY'].update(disabled=bool(background_proc))
         window['QUEUE_ID'].update(
-            disabled=not cfg.AUTO_LOBBY or bool(background_proc))
+            disabled=bool(background_proc))
         window['PRIMARY_ROLE'].update(
             disabled=not should_display_role_selection(cfg) or bool(background_proc))
         window['SECONDARY_ROLE'].update(
@@ -111,17 +101,6 @@ def update_state(league_api, window, background_proc, event, values=None):
             disabled=not should_display_role_selection(cfg) or bool(background_proc))
 
     # Checkboxes toggle the value
-    elif event == 'AUTO_LOBBY':
-        cfg.AUTO_LOBBY = not cfg.AUTO_LOBBY
-
-        # Cannot select a queue ID if we are not creating a lobby anyways
-        window['QUEUE_ID'].update(
-            disabled=not cfg.AUTO_LOBBY or bool(background_proc))
-        window['PRIMARY_ROLE'].update(
-            disabled=not should_display_role_selection(cfg) or bool(background_proc))
-        window['SECONDARY_ROLE'].update(
-            disabled=not should_display_role_selection(cfg) or bool(background_proc))
-
     # TODO do not allow user to select the same role twice
     elif event == 'PRIMARY_ROLE':
         cfg.PRIMARY_ROLE = Roles[values['PRIMARY_ROLE']]
@@ -141,8 +120,6 @@ def update_state(league_api, window, background_proc, event, values=None):
 
 
 def should_display_role_selection(cfg: Config):
-    if not cfg.AUTO_LOBBY:
-        return False
     if not queue_has_roles(cfg.QUEUE_ID):
         return False
     return True
