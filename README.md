@@ -51,3 +51,5 @@ Note: I don't know how to sign executables. You may get a warning. Please be car
 ## Credits
 
 This project is heavily inspired from [directx's auto-lock script](https://github.com/directx5/League-of-Legends-Auto-Accept-Insta-Lock-Python).
+
+For a more complete and larger scoped application, check out [KebsCS/KBotExt](https://github.com/KebsCS/KBotExt).
