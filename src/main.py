@@ -131,6 +131,9 @@ def update_state(league_api, window, background_proc, event, values=None):
             background_proc.terminate()
         sys.exit(0)
 
+    if event in ['QUEUE_ID', 'PRIMARY_ROLE', 'SECONDARY_ROLE']:
+        window[event].Widget.select_clear()
+
     league_api.update_config(cfg)
 
     return background_proc
