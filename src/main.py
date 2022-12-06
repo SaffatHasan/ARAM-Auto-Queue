@@ -8,6 +8,7 @@ import multiprocessing
 import sys
 import os
 from typing import List
+from enum import Enum
 import PySimpleGUI as sg
 import urllib3
 from config import Config
@@ -18,7 +19,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
 def create_dropdown_row(label: str,
-                        values: List[str],
+                        enum: Enum,
                         key: str,
                         default_value: str,
                         disabled: bool = False) -> List[sg.Element]:
@@ -28,7 +29,7 @@ def create_dropdown_row(label: str,
     return [
         sg.Text(label, size=(10, 1)),
         sg.Combo(
-            values=values,
+            values=[e.name for e in enum],
             key=key,
             default_value=default_value,
             disabled=disabled,
@@ -45,20 +46,20 @@ def launch_gui(league_api: LeagueAPI, cfg: Config):
         [sg.Text('Running', key='status', text_color='green')],
         create_dropdown_row(
             label='Mode',
-            values=[x.name for x in QueueType],
+            enum=QueueType,
             key='QUEUE_ID',
             default_value=cfg.QUEUE_ID.name,
         ),
         create_dropdown_row(
             label='Primary',
-            values=[x.name for x in Roles],
+            enum=Roles,
             key='PRIMARY_ROLE',
             default_value=cfg.PRIMARY_ROLE.name,
             disabled=not queue_has_roles(cfg.QUEUE_ID),
         ),
         create_dropdown_row(
             label='Secondary',
-            values=[x.name for x in Roles],
+            enum=Roles,
             key='SECONDARY_ROLE',
             default_value=cfg.SECONDARY_ROLE.name,
             disabled=not queue_has_roles(cfg.QUEUE_ID),
