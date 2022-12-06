@@ -33,8 +33,6 @@ class LeagueAPI:
         # pylint: disable=R0912
         phase = self.session_phase()
         if phase is None:
-            if not self.config.AUTO_LOBBY:
-                return
             self.create_lobby()
             self.select_roles()
         elif phase == 'Lobby':
