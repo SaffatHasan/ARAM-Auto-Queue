@@ -72,6 +72,8 @@ def launch_gui(league_api: LeagueAPI, cfg: Config):
         layout=layout,
         icon=resource_path('favicon.ico'),
         finalize=True,
+        return_keyboard_events=True,
+        use_default_focus=False,
     )
 
     # Run lcu_api in the background, store its process in background_proc
@@ -94,7 +96,7 @@ def update_state(league_api, window, background_proc, event, values=None):
     hits the start/stop button then we toggle behavior.
     """
     cfg = league_api.config
-    if event == 'toggle':
+    if event in ['toggle', ' ']:
         background_proc = toggle_process(background_proc, league_api)
         window['status'].update(
             'Running' if background_proc else 'Not running')
