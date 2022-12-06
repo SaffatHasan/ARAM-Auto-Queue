@@ -7,6 +7,7 @@ Entrypoint for AutoQr
 import multiprocessing
 import sys
 import os
+from typing import List
 import PySimpleGUI as sg
 import urllib3
 from config import Config
@@ -16,45 +17,54 @@ from lcu_api import LeagueAPI
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
+def create_dropdown_row(label: str,
+                        values: List[str],
+                        key: str,
+                        default_value: str,
+                        disabled: bool = False) -> List[sg.Element]:
+    """
+    Creates a dropdown menu and a corresponding Text label.
+    """
+    return [
+        sg.Text(label, size=(10, 1)),
+        sg.Combo(
+            values=values,
+            key=key,
+            default_value=default_value,
+            disabled=disabled,
+            readonly=True,
+            enable_events=True,
+            size=(10, 1),
+        ),
+    ]
+
+
 def launch_gui(league_api: LeagueAPI, cfg: Config):
     sg.theme('DefaultNoMoreNagging')
     layout = [
-        [sg.Text(
-            'Running',
-            key='status',
-            text_color='green',
-        )],
-        [sg.Text('Mode', size=(10, 1)), sg.Combo(
-            [x.name for x in QueueType],
+        [sg.Text('Running', key='status', text_color='green')],
+        create_dropdown_row(
+            label='Mode',
+            values=[x.name for x in QueueType],
             key='QUEUE_ID',
             default_value=cfg.QUEUE_ID.name,
-            readonly=True,
-            enable_events=True,
-            size=(10, 1),
-        )],
-        [sg.Text('Primary', size=(10, 1)), sg.Combo(
-            [x.name for x in Roles],
+        ),
+        create_dropdown_row(
+            label='Primary',
+            values=[x.name for x in Roles],
             key='PRIMARY_ROLE',
             default_value=cfg.PRIMARY_ROLE.name,
             disabled=not queue_has_roles(cfg.QUEUE_ID),
-            readonly=True,
-            enable_events=True,
-            size=(10, 1),
-        )],
-        [sg.Text('Secondary', size=(10, 1)), sg.Combo(
-            [x.name for x in Roles],
+        ),
+        create_dropdown_row(
+            label='Secondary',
+            values=[x.name for x in Roles],
             key='SECONDARY_ROLE',
             default_value=cfg.SECONDARY_ROLE.name,
             disabled=not queue_has_roles(cfg.QUEUE_ID),
-            readonly=True,
-            enable_events=True,
-            size=(10, 1),
-        )],
-        [sg.Push(), sg.Button(
-            'Stop',
-            key='toggle',
-            size=(10,1),
-        )],
+        ),
+        # sg.Push to force a right-alignment
+        [sg.Push(), sg.Button('Stop', key='toggle', size=(10, 1))],
     ]
     window = sg.Window(
         title='AutoQr',
