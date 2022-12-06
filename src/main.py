@@ -50,7 +50,10 @@ def launch_gui(league_api: LeagueAPI, cfg: Config):
             enable_events=True,
             size=(10, 1),
         )],
-        [sg.Button('Stop', key='toggle')],
+        [sg.Push(), sg.Button(
+            'Stop',
+            key='toggle',
+        )],
     ]
     window = sg.Window(
         title='AutoQr',
