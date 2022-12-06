@@ -53,6 +53,7 @@ def launch_gui(league_api: LeagueAPI, cfg: Config):
         [sg.Push(), sg.Button(
             'Stop',
             key='toggle',
+            size=(10,1),
         )],
     ]
     window = sg.Window(
