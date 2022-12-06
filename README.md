@@ -1,5 +1,11 @@
 # AutoQr ![lint](https://github.com/SaffatHasan/AutoQr/actions/workflows/pylint.yml/badge.svg) [![Package Application with Pyinstaller](https://github.com/SaffatHasan/AutoQr/actions/workflows/pyinstaller.yml/badge.svg)](https://github.com/SaffatHasan/AutoQr/actions/workflows/pyinstaller.yml)
 
+## Features
+
+* Creates lobby
+* Accepts queue
+* Skips post-game lobby
+
 ![](assets/sample.png)
 
 
