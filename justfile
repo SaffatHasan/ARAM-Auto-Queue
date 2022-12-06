@@ -20,7 +20,7 @@ package: install-deps
         --noconsole \
         --name "AutoQr" \
         --add-data "favicon.ico;." \
-        --icon=favicon.ico \
+        --icon=../assets/favicon.ico \
         --hidden-import "yaml" \
         --distpath ../dist \
         --workpath ../build \

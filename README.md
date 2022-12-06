@@ -6,11 +6,11 @@
 * Accepts queue
 * Skips post-game lobby
 
-![](assets/sample.png)
+![](docs/sample.png)
 
 
 !! Please ensure to disable closing client in background for best performance / compatibility !!
-![](assets/Screenshot_1.png)
+![](docs/Screenshot_1.png)
 
 The purpose of this program is to streamline the flow between games. You'll no longer have to wait for buggy or unresponsive parts of the client to load as this script will programatically skip them.
 
