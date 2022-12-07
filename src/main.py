@@ -25,6 +25,16 @@ def create_dropdown_row(label: str,
                         disabled: bool = False) -> List[sg.Element]:
     """
     Creates a dropdown menu and a corresponding Text label.
+
+    Args:
+        label (str): The label to display next to the dropdown menu.
+        enum (Enum): An enumeration containing the values to display in the dropdown menu.
+        key (str): The key to use for the dropdown menu.
+        default_value (str): The default value to display in the dropdown menu.
+        disabled (bool): Whether the dropdown menu should be disabled. Defaults to False.
+
+    Returns:
+        List[sg.Element]: A list containing the Text and Combo elements for the dropdown row.
     """
     return [
         sg.Text(label, size=(10, 1)),
@@ -41,6 +51,13 @@ def create_dropdown_row(label: str,
 
 
 def launch_gui(league_api: LeagueAPI, cfg: Config):
+    """
+    Launches the GUI for the AutoQr program.
+
+    Args:
+        league_api (LeagueAPI): The LeagueAPI instance to use for communicating with the League of Legends client.
+        cfg (Config): The Config instance containing the settings for the AutoQr program.
+    """
     sg.theme('DefaultNoMoreNagging')
     layout = [
         [sg.Text('Running', key='status', text_color='green')],
