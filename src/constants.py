@@ -16,6 +16,7 @@ class QueueType(Enum):
     RANKED = 420
     BLIND = 430
     FLEX = 440
+    QK_PLY = 490
     ULTMT_SPLLBK = 1400
 
 
