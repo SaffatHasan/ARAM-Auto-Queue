@@ -1,4 +1,4 @@
-""" constants.py
+3""" constants.py
 
 """
 
@@ -16,6 +16,7 @@ class QueueType(Enum):
     RANKED = 420
     BLIND = 430
     FLEX = 440
+    QK_PLY = 490
     ULTMT_SPLLBK = 1400
 
 
@@ -25,6 +26,7 @@ def queue_has_roles(queue: QueueType):
         QueueType.FLEX,
         QueueType.RANKED,
         QueueType.ULTMT_SPLLBK,
+        QueueType.QK_PLY,
     }
 
 
