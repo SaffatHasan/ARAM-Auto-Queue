@@ -1,4 +1,4 @@
-""" constants.py
+3""" constants.py
 
 """
 
@@ -26,6 +26,7 @@ def queue_has_roles(queue: QueueType):
         QueueType.FLEX,
         QueueType.RANKED,
         QueueType.ULTMT_SPLLBK,
+        QueueType.QK_PLY,
     }
 
 
